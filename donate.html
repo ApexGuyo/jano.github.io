@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate - Jiru Afya</title>
+  <script src="https://js.stripe.com/v3/"></script> <!-- Stripe JS -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    #donation-form {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      background: url('logo.jpeg') no-repeat center;
+      background-size: 500px 500px;
+      background-color: rgba(255, 255, 255, 0.9); /* Add slight transparency */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    #donation-form label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    #donation-form input {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #donation-form button {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #donation-form button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <form id="donation-form">
+    <label for="amount">Donation Amount (KES):</label>
+    <input type="number" id="amount" name="amount" placeholder="Enter amount" required min="1">
+
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+    <label for="phone">Phone Number (M-Pesa):</label>
+    <input type="tel" id="phone" name="phone" placeholder="254XXXXXXXXX" required>
+
+    <!-- Buttons for Payment Methods -->
+    <button type="button" id="mpesa-button">Donate with M-Pesa</button>
+    <button type="button" id="card-button">Donate with Card</button>
+  </form>
+
+  <script>
+    // Stripe Payment Integration
+    const stripe = Stripe("YOUR_STRIPE_PUBLISHABLE_KEY"); // Replace with your Stripe public key
+
+    document.getElementById("card-button").addEventListener("click", async () => {
+      const amount = document.getElementById("amount").value;
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+
+      if (!amount || !name || !email) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      try {
+        const response = await fetch("/create-checkout-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: amount * 100, name, email }) // Convert to cents
+        });
+
+        const session = await response.json();
+        stripe.redirectToCheckout({ sessionId: session.id });
+      } catch (error) {
+        alert("Error processing card payment. Please try again.");
+      }
+    });
+
+    // M-Pesa Payment Integration
+    document.getElementById("mpesa-button").addEventListener("click", async () => {
+      const amount = document.getElementById("amount").value;
+      const phone = document.getElementById("phone").value;
+
+      if (!amount || !phone) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      try {
+        const response = await fetch("/donate-mpesa", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount, phone })
+        });
+
+        const result = await response.json();
+        if (result.status === "success") {
+          alert("M-Pesa payment initiated. Complete the transaction on your phone.");
+        } else {
+          alert("Error initiating M-Pesa payment. Please try again.");
+        }
+      } catch (error) {
+        alert("Error processing M-Pesa payment. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>

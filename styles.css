@@ -1,0 +1,180 @@
+/* Global Styles */
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #F8F9FA;
+    color: #333;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: #E8F5E9;
+    box-shadow: inset 8px 8px 15px #bdbdbd, inset -8px -8px 15px #ffffff;
+  }
+  
+  header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2E7D32;
+  }
+  
+  header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  header nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 6px #bdbdbd, -3px -3px 6px #ffffff;
+    transition: all 0.3s ease;
+  }
+  
+  header nav ul li a:hover {
+    background: #A5D6A7;
+    color: white;
+  }
+  
+  /* Hero Section */
+  .hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: #E0F7FA;
+    box-shadow: inset 8px 8px 15px #bdbdbd, inset -8px -8px 15px #ffffff;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    color: #00695C;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    margin: 20px 0;
+  }
+  
+  .hero .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .hero .button {
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 20px;
+    color: white;
+    background: #FF7043;
+    box-shadow: 6px 6px 12px #bdbdbd, -6px -6px 12px #ffffff;
+    transition: all 0.3s ease;
+  }
+  
+  .hero .button:hover {
+    background: #FF8A65;
+  }
+  
+  .hero .button.secondary {
+    background: #A5D6A7;
+    color: #333;
+  }
+  
+  /* Core Values Section */
+  .values {
+    padding: 50px 20px;
+    text-align: center;
+    background: #F8F9FA;
+  }
+  
+  .values h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .values .cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .values .card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    width: 250px;
+    box-shadow: 8px 8px 15px #bdbdbd, -8px -8px 15px #ffffff;
+    transition: all 0.3s ease;
+  }
+  
+  .values .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .values .card h3 {
+    margin-top: 0;
+    color: #2E7D32;
+  }
+  
+  .values .card p {
+    font-size: 0.9rem;
+  }
+  
+  /* Donation and Contact Forms */
+form {
+  max-width: 500px;
+  margin: 20px auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 8px 8px 15px #bdbdbd, -8px -8px 15px #ffffff;
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: inset 4px 4px 8px #bdbdbd, inset -4px -4px 8px #ffffff;
+}
+
+form button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Program Cards */
+.program-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.program-card {
+  background: #ffffff;
+  padding: 20px;
+  width: 300px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 8px 8px 15px #bdbdbd, -8px -8px 15px #ffffff;
+}
+
+.program-card:hover {
+  transform: scale(1.05);
+}
